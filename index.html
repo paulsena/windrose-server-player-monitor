@@ -33,6 +33,8 @@
       radial-gradient(ellipse at top, #3a2b1d 0%, var(--bg) 42%, var(--bg-deep) 100%);
     background-size: 100% 46px, 100% 100%;
     padding: 2rem 1rem 4rem;
+    font-size: 14px;
+    font-weight: 400;
   }
 
   body::before {
@@ -126,17 +128,17 @@
     font-family: Georgia, "Times New Roman", serif;
     color: var(--gold);
     letter-spacing: 0;
-    font-weight: 700;
+    font-weight: 400;
   }
 
   h1 {
-    font-size: clamp(2.15rem, 4.5vw, 3.8rem);
-    line-height: 0.95;
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    line-height: 1;
     text-shadow: 0 2px 0 rgba(0,0,0,0.28);
   }
 
   h2 {
-    font-size: clamp(1.45rem, 2.4vw, 2rem);
+    font-size: clamp(1.2rem, 2vw, 1.6rem);
   }
 
   .subtitle {
@@ -186,15 +188,16 @@
   }
 
   .uptime {
-    margin-top: 0.7rem;
+    margin-top: 0.6rem;
     color: var(--gold);
-    font-weight: 700;
+    font-weight: 500;
+    font-size: 0.95rem;
   }
 
   .since {
-    margin-top: 0.45rem;
+    margin-top: 0.35rem;
     color: var(--muted);
-    font-size: 0.82rem;
+    font-size: 0.78rem;
   }
 
   .stats-bar {
@@ -202,31 +205,31 @@
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-around;
-    gap: 1.5rem;
-    margin-top: 1.65rem;
-    padding: 1.25rem 1.5rem;
+    gap: 1.25rem;
+    margin-top: 1.25rem;
+    padding: 1rem 1.25rem;
     background: linear-gradient(180deg, rgba(70, 51, 33, 0.82), rgba(43, 30, 20, 0.9));
     border: 1px solid var(--line-soft);
-    box-shadow: 0 18px 44px var(--shadow), inset 0 1px 0 rgba(240, 201, 107, 0.08);
+    box-shadow: 0 12px 32px var(--shadow), inset 0 1px 0 rgba(240, 201, 107, 0.08);
   }
 
   .stat-item {
     display: flex;
     align-items: baseline;
-    gap: 0.6rem;
+    gap: 0.5rem;
   }
 
   .label {
     color: var(--dim);
-    font-size: 0.85rem;
-    font-weight: 700;
+    font-size: 0.8rem;
+    font-weight: 500;
     margin: 0;
   }
 
   .stat-value {
     color: var(--text);
-    font-size: 1.25rem;
-    font-weight: 800;
+    font-size: 1.1rem;
+    font-weight: 600;
     line-height: 1.05;
     overflow-wrap: anywhere;
   }
@@ -271,8 +274,13 @@
   }
 
   .panel-count {
-    color: var(--dim);
-    font-size: 0.76rem;
+    color: var(--muted);
+    font-size: 0.75rem;
+  }
+
+  .panel-count span {
+    color: var(--gold);
+    font-weight: 700;
   }
 
   .list {
@@ -305,55 +313,57 @@
   .name {
     min-width: 0;
     color: #eadfce;
-    font-size: 1.05rem;
-    font-weight: 800;
+    font-size: 0.95rem;
+    font-weight: 600;
     overflow-wrap: anywhere;
   }
 
   .meta {
-    margin-top: 0.25rem;
+    margin-top: 0.2rem;
     color: var(--dim);
     font-family: "Cascadia Code", Consolas, "SF Mono", Menlo, monospace;
-    font-size: 0.78rem;
+    font-size: 0.7rem;
     overflow-wrap: anywhere;
   }
 
   .time {
     color: var(--gold);
     font-family: "Cascadia Code", Consolas, "SF Mono", Menlo, monospace;
-    font-size: 1.05rem;
-    font-weight: 800;
+    font-size: 0.95rem;
+    font-weight: 600;
     text-align: right;
     white-space: nowrap;
   }
 
   .time .state {
     display: block;
-    margin-top: 0.18rem;
+    margin-top: 0.15rem;
     color: var(--dim);
-    font-size: 0.66rem;
-    font-weight: 700;
+    font-size: 0.6rem;
+    font-weight: 500;
   }
 
   .recent .row {
-    min-height: 68px;
+    min-height: 62px;
   }
 
   .recent .name {
     color: #c9b88e;
-    font-size: 1rem;
+    font-size: 0.9rem;
+    font-weight: 500;
   }
 
   .recent .time {
     color: var(--dim);
-    font-size: 0.86rem;
+    font-size: 0.8rem;
   }
 
   .recent .time strong {
     display: block;
-    margin-top: 0.35rem;
+    margin-top: 0.3rem;
     color: #c9b88e;
-    font-size: 0.8rem;
+    font-size: 0.75rem;
+    font-weight: 500;
   }
 
   .tag {
@@ -462,10 +472,6 @@
 
   <section class="stats-bar" aria-label="Server summary">
     <div class="stat-item">
-      <div class="label">Crew aboard:</div>
-      <div class="stat-value"><span class="gold" id="crew-online">0</span> / <span id="crew-max">?</span></div>
-    </div>
-    <div class="stat-item">
       <div class="label">Access:</div>
       <div class="stat-value" id="access">Unknown</div>
     </div>
@@ -483,7 +489,7 @@
     <section class="panel">
       <div class="section-head">
         <h2>Crew on Watch</h2>
-        <div class="panel-count" id="online-count">0 live - ticking</div>
+        <div class="panel-count" id="online-count">Crew aboard: <span id="crew-online">0</span> / <span id="crew-max">?</span></div>
       </div>
       <div id="online-empty" class="empty">No crew are aboard right now.</div>
       <div id="online-body" class="list hidden"></div>
@@ -617,7 +623,6 @@
       var tag = append(time, 'span', 'tag', 'Longest watch');
       time.insertBefore(tag, time.firstChild);
     }
-    append(time, 'span', 'state', 'in game');
     return row;
   }
 
@@ -679,7 +684,6 @@
     setText('world-sub', info.world_id ? 'world id - ' + String(info.world_id).length + ' chars' : 'world id pending');
     setText('build', buildLabel(info));
     setText('build-sub', 'dashboard api - live');
-    setText('online-count', online.length + ' live - ticking');
     setText('recent-count', recent.length + ' known');
     setText('as-of', formatDate(data.as_of));
 
